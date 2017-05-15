@@ -15,3 +15,9 @@ REST APIs samples in Jersey and RESTEasy with HATEOAS and Swagger documentation
 - HATEOAS (Hypermedia as the Engine of Application State) is a constraint of the REST application architecture.
 - A hypermedia-driven site provides information to navigate the site's REST interfaces dynamically by including hypermedia links with the responses.
 - It differs from SOA-based and WSDL-driven interfaces.
+
+# ETags
+- Entity Tags are useful HTTP headers which can be used to build a super fast application by minimizing the server load on system.
+- ETag is set in the client response so that client can use different control request headers such as If-Match and If-None-Match for conditional requests.
+- On server side, a unchanged ETag (match done between ETag attached with HTTP request and ETag calculated for requested resource) means, a resource is unchanged from last requested time, so sending a HTTP 304 header [Not Modified] will be enough for the client to use local copy of resource.
+
