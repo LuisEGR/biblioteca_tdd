@@ -82,3 +82,5 @@ Both the implementations were ran on tomcat 7.
 - ETag is set in the client response so that client can use different control request headers such as If-Match and If-None-Match for conditional requests.
 - On server side, a unchanged ETag (match done between ETag attached with HTTP request and ETag calculated for requested resource) means, a resource is unchanged from last requested time, so sending a HTTP 304 header [Not Modified] will be enough for the client to use local copy of resource.
 
+# Swagger
+TBD
