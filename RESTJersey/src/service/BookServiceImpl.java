@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +15,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.EntityTag;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
@@ -32,7 +36,7 @@ import common.Responses;
 import constants.Constants;
 
 /**
- * CRUD Operation Implementation of REST API.
+ * CRUD Operation Implementation of REST API with eTag functionality.
  * 
  * @author "Jigar Gosalia"
  *
@@ -45,8 +49,10 @@ public class BookServiceImpl implements BookService {
 	@Context
 	private UriInfo uri;
 
+	// local DB
 	private static Map<Integer, Book> books = new HashMap<Integer, Book>();
 
+	// local DB
 	private static Map<String, Book> booksByName = new HashMap<String, Book>();
 
 	/* ---- Book API ---- */
@@ -54,10 +60,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@GET
 	@Path("/book/{id}")
-	public Response get(@PathParam("id") int id) {
-		Book book = books.get(id);
-		if (book != null) {
-			return Response.ok(book).build();
+	public Response get(@PathParam("id") int id, @Context Request request) {
+		if (books.get(id) != null) {
+			return getBook(id, request);
 		}
 		return getResponse(Responses.DOESNT_EXISTS);
 	}
@@ -79,7 +84,7 @@ public class BookServiceImpl implements BookService {
 	public Response edit(Book book) {
 		if (booksByName.containsKey(book.getName())) {
 			editBook(book);
-			return getResponse(Responses.CREATED);
+			return getResponse(Responses.UPDATED);
 		}
 		return getResponse(Responses.DOESNT_EXISTS);
 	}
@@ -116,6 +121,7 @@ public class BookServiceImpl implements BookService {
 
 	private Response getResponse(Responses responseValue) {
 		GenericResponse response = new GenericResponse();
+		// Handle response per error code
 		if (responseValue.equals(Responses.ALREADY_EXISTS)) {
 			response = new GenericResponse(false, Responses.ALREADY_EXISTS.getMessage(), Responses.ALREADY_EXISTS.getCode());
 			return Response.status(422).entity(response).build();
@@ -137,6 +143,7 @@ public class BookServiceImpl implements BookService {
 
 	private void addBook(Book book) {
 		Book newBook = new Book(book.getName(), book.getAuthors(), book.getIsbn(), book.getPrice());
+		// add HATEOAS links
 		addLinks(newBook);
 		books.put(newBook.getId(), newBook);
 		booksByName.put(newBook.getName(), newBook);
@@ -147,6 +154,9 @@ public class BookServiceImpl implements BookService {
 		newBook.setAuthors(book.getAuthors());
 		newBook.setIsbn(book.getIsbn());
 		newBook.setPrice(book.getPrice());
+		// update eTag
+		newBook.setDateModified(new Date());
+		// add HATEOAS links
 		addLinks(newBook);
 		books.put(newBook.getId(), newBook);
 		booksByName.put(newBook.getName(), newBook);
@@ -158,6 +168,32 @@ public class BookServiceImpl implements BookService {
 		Link deleteLink = new Link(resourcePath, Relation.SELF.getValue(), Method.DELETE.toString());
 		Link putLink = new Link(resourcePath, Relation.SELF.getValue(), Method.PUT.toString());
 		book.setLinks(Arrays.asList(getLink, deleteLink, putLink));
+	}
+
+	private Response getBook(int id, Request request) {
+
+		Response.ResponseBuilder responseBuilder = null;
+
+		// Cache-Control header
+		CacheControl cacheControl = new CacheControl();
+		cacheControl.setMaxAge(86400);
+
+		// Calculate eTag on last modified date 
+		EntityTag eTag = new EntityTag(String.valueOf(books.get(id).hashCode()));
+
+		// Verify if it matched with eTag available in HTTP request
+        responseBuilder = request.evaluatePreconditions(eTag);
+
+		// If eTag matches then responseBuilder will be != null, return response
+		// without any further processing.
+        if (responseBuilder != null) {
+            return responseBuilder.cacheControl(cacheControl).tag(eTag).build();
+        }
+
+        // If responseBuilder is null then either it is first time request or resource is modified
+        // Get the updated representation and return with eTag attached to it
+        responseBuilder = Response.ok(books.get(id)).cacheControl(cacheControl).tag(eTag);
+		return responseBuilder.build();
 	}
 
 }

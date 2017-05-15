@@ -1,5 +1,6 @@
 package pojo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,6 +26,8 @@ public class Book extends Resource {
 
 	private double price;
 
+	private Date dateModified;
+
 	public Book() {}
 
 	public Book(String name, List<String> authors, String isbn, double price) {
@@ -35,6 +38,7 @@ public class Book extends Resource {
 		this.authors = authors;
 		this.isbn = isbn;
 		this.price = price;
+		this.dateModified = new Date();
 	}
 
 	public int getId() {
@@ -73,6 +77,14 @@ public class Book extends Resource {
 		this.price = price;
 	}
 
+	public Date getDateModified() {
+		return dateModified;
+	}
+
+	public void setDateModified(Date dateModified) {
+		this.dateModified = dateModified;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,6 +113,6 @@ public class Book extends Resource {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", name=" + name + ", authors=" + authors
-				+ ", isbn=" + isbn + ", price=" + price + "]";
+				+ ", isbn=" + isbn + ", price=" + price + "dateModified=" + dateModified + "]";
 	}
 }

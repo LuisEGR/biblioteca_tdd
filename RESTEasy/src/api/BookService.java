@@ -1,5 +1,6 @@
 package api;
 
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 import pojo.Book;
@@ -18,7 +19,7 @@ public interface BookService {
 
 	public Response delete(int id);
 
-	public Response get(int id);
+	public Response get(int id, Request request);
 
 	public Response getAll();
 }
