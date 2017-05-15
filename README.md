@@ -1,5 +1,7 @@
 # Summary
-REST APIs samples in Jersey and RESTEasy with HATEOAS and Swagger documentation
+REST APIs samples with HATEOAS, eTags and Swagger documentation
+- Jersey
+- RESTEasy
 
 # REST APIs
 - REST is an architectural style based on web-standards and HTTP protocol. 
