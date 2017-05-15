@@ -1,0 +1,267 @@
+{
+	"variables": [],
+	"info": {
+		"name": "RESTJerseyCollection",
+		"_postman_id": "1abea30f-81d0-b5ea-5b94-6a917956e368",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JSON Book - Dummy",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/dummy/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "XML Book - Dummy",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/dummy",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "JSON Book - Add",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1007,\n  \"name\": \"Introduction to Algorithms\",\n  \"authors\": [\n    \"Thomas Cormen\",\n    \"Charles Leiserson\",\n    \"Ronald Rivest\",\n    \"Clifford Stein\"\n  ],\n  \"isbn\": \"0262033844\",\n  \"price\": 100\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "XML Book - Add",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<book>\n    <authors>Thomas Cormen</authors>\n    <authors>Charles Leiserson</authors>\n    <authors>Ronald Rivest</authors>\n    <authors>Clifford Stein</authors>\n    <isbn>0262033844</isbn>\n    <name>Introduction to Algorithm</name>\n    <price>100.0</price>\n</book>"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "JSON Book - Get",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/1002",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "ETag",
+						"value": "-604859939",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "XML Book - Get",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/1002",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "JSON Book - Delete",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/1001",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "XML Book - Delete",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/1001",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "JSON Book - Get All",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "XML Book - Get All",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book/all",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "JSON Book - Edit",
+			"request": {
+				"url": "http://localhost:8080/RESTJersey/library/book",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1007,\n  \"name\": \"Introduction to Algorithms\",\n  \"authors\": [\n    \"Thomas Cormen\",\n    \"Charles Leiserson\",\n    \"Ronald Rivest\",\n    \"Clifford Stein\"\n  ],\n  \"isbn\": \"0262033844\",\n  \"price\": 500\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
