@@ -5,6 +5,9 @@ jdk:
 #   - mysql
 addons:
   mariadb: '10.2'
+cache:                                                                          
+  directories:                                                                  
+    - $HOME/.m2       
 before_install: 
   - cat ~travis/.my.cnf
   - ls .
