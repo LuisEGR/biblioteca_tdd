@@ -10,11 +10,12 @@ before_install:
 
 sudo: true
 before_script:
-  - bash .travis.install-mysql-5.7.sh
+  # - bash .travis.install-mysql-5.7.sh
   - mysql -e 'SELECT @@version;'
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  # - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - USER='ISCuenta'
   - PASSWORD='Escom_17'
+  - mysql -e "GRANT ALL PRIVILEGES ON Biblioteca_Personas . * TO 'ISCuenta'@'localhost' IDENTIFIED BY 'Escom_17'";
   - mysql -u root < sql_scripts/DB_Biblioteca_Personas_CreateDB.sql
   - echo Base de datos creada.
   - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Catalogos.sql
