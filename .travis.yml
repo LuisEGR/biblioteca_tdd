@@ -5,6 +5,20 @@ services:
   - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+ 
   - cat ~travis/.my.cnf
   - ls .
+
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - USER='ISCuenta'
+  - PASSWORD='Escom_17'
+  - mysql -u root -proot < sql_scripts/DB_Biblioteca_Personas_CreateDB.sql
+  - echo Base de datos creada.
+  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Catalogos.sql
+  - echo Catalogos Inicializados.
+  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Extras.sql
+  - echo Funciones extras agregadas.
+  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Personas.sql
+  - echo Pruebas de Insercion realizadas.
+  - mysql -e 'SHOW * FROM Personas'
