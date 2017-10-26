@@ -85,7 +85,7 @@ ALTER TABLE Personas_Deportes ADD UNIQUE (id_persona,id_deporte);
 -- ----------------------------------------------------------------------------
 
 -- Cuenta de acceso -----------------------------------------------------------
--- DROP USER IF EXISTS 'ISCuenta'@'localhost'; 
--- CREATE USER 'ISCuenta'@'localhost' IDENTIFIED BY 'Escom_17';
--- GRANT ALL PRIVILEGES ON Biblioteca_Personas . * TO 'ISCuenta'@'localhost';
+DROP USER IF EXISTS 'ISCuenta'@'localhost'; 
+CREATE USER 'ISCuenta'@'localhost' IDENTIFIED BY 'Escom_17';
+GRANT ALL PRIVILEGES ON Biblioteca_Personas . * TO 'ISCuenta'@'localhost';
 -- ----------------------------------------------------------------------------
