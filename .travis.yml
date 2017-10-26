@@ -12,15 +12,15 @@ before_install:
 sudo: true
 before_script:
   - mysql -e 'SELECT @@version;'
-  - USER='ISCuenta'
+  - USERDB='ISCuenta'
   - PASSWORD='Escom_17'
   # - mysql -e "GRANT ALL PRIVILEGES ON Biblioteca_Personas . * TO 'ISCuenta'@'localhost' IDENTIFIED BY 'Escom_17'";
   - mysql -u root < sql_scripts/DB_Biblioteca_Personas_CreateDB.sql
   - echo Base de datos creada.
-  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Catalogos.sql
+  - mysql -u $USERDB -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Catalogos.sql
   - echo Catalogos Inicializados.
-  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Extras.sql
+  - mysql -u $USERDB -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Extras.sql
   - echo Funciones extras agregadas.
-  - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Personas.sql
+  - mysql -u $USERDB -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Personas.sql
   - echo Pruebas de Insercion realizadas.
   - mysql -e 'SELECT * FROM Biblioteca_Personas.Personas LIMIT 10'
