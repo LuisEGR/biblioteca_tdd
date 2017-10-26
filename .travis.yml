@@ -4,12 +4,13 @@ jdk:
 services:
   - mysql
 
-before_install:
-  - bash .travis.install-mysql-5.7.sh
+before_install: 
   - cat ~travis/.my.cnf
   - ls .
-
+  
+sudo: true
 before_script:
+  - bash .travis.install-mysql-5.7.sh
   - mysql -e 'SELECT @@version;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - USER='ISCuenta'
