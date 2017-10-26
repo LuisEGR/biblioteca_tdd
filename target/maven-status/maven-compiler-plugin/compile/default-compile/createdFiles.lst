@@ -1,0 +1,12 @@
+main\common\Responses.class
+main\application\LibraryApplication.class
+main\common\Method.class
+main\common\Resource.class
+main\common\GenericResponse.class
+main\constants\Constants.class
+main\service\BookServiceImpl.class
+main\common\Relation.class
+main\pojo\Books.class
+main\common\Link.class
+main\pojo\Book.class
+main\api\BookService.class
