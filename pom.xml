@@ -5,7 +5,14 @@
 	<artifactId>RESTJersey</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+<<<<<<< HEAD
 
+=======
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+>>>>>>> 4ef12a22123f91af1c7f4327bddc8ebfc3707a49
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
