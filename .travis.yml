@@ -7,7 +7,7 @@ services:
 before_install: 
   - cat ~travis/.my.cnf
   - ls .
-  
+
 sudo: true
 before_script:
   - bash .travis.install-mysql-5.7.sh
@@ -23,4 +23,4 @@ before_script:
   - echo Funciones extras agregadas.
   - mysql -u $USER -p$PASSWORD < sql_scripts/DB_Biblioteca_Personas_Personas.sql
   - echo Pruebas de Insercion realizadas.
-  - mysql -e 'SHOW * FROM Personas'
+  - mysql -e 'SHOW * FROM Biblioteca_Personas.Personas'
